@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lunch Break</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="box">
+      <h1>chitchat-matcher</h1>
+
+      <h3>Who's in today?</h3>
+      <div class="center">
+        <input type="text" id="name" name="name" />
+
+        <button class="save" onclick="storeName()">Save</button>
+      </div>
+      <p id="matchDisplay"></p>
+      <div class="center">
+        <button class="find" onclick="newMatch()">Find Match</button> 
+      </br>
+        <button class="delete" onclick="window.location.reload();">
+         DELETE
+        </button>
+        <p><u>Today's Members List</u></p>
+
+        <p id="pText"></p>
+      </div>
+
+      <script src="js/index.js"></script>
+    </div>
+  </body>
+</html>
+<!-- <!DOCTYPE html>
+<html>
+  <body>
+    <button onclick="pairUp()">Click to pair</button>
+    <div id="partnerlist" class="right"></div>
+  </body>
+</html> -->
