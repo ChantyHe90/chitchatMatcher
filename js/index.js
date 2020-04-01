@@ -1,4 +1,4 @@
-const names = [];
+const names = ["chanty"];
 let runOdd;
 
 function storeName() {
