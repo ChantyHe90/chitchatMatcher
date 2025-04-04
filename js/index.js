@@ -4,16 +4,20 @@
 
 export const names = [];
 
- export function storeName(nameInput) {
-  if (!names.includes(nameInput)) {
-    names.push(nameInput);
-  } else {
-    return "Name is already on the list";
-  }
+export function storeName() {
+  const input = document.getElementById("name");
+  const nameInput = input.value.trim();
 
-  // Update DOM
-  document.getElementById("pText").innerHTML = names.join("<br/>");
+  if (nameInput && !names.includes(nameInput)) {
+    names.push(nameInput);
+    document.getElementById("pText").innerHTML = names.join("<br/>");
+    input.value = '';
+  } else {
+    alert("Name is already on the list or empty!");
+  }
 }
+
+
 
 export function selectRandom() {
   if (names.length === 0) return null;
@@ -25,11 +29,14 @@ export function selectRandom() {
 
 export function newMatch() {
   if (names.length < 2) {
-    return "Not enough names to match";
+    document.getElementById("matchDisplay").innerHTML = "Not enough names to match";
+    return;
   }
 
   let arr1 = selectRandom();
   let arr2 = selectRandom();
-  document.getElementById("matchDisplay").innerHTML = `${arr1} & ${arr2}`;
+  document.getElementById("matchDisplay").innerHTML = `${arr1} - ${arr2}`;
   }
 
+  window.storeName = storeName;
+  window.newMatch = newMatch;
