@@ -14,25 +14,37 @@ beforeEach(() => {
 });
 
 test('Add item to the list', () => {
-  storeName('New Item');
+  const input = document.getElementById("name");
+  input.value = 'New Item'; 
+
+  storeName();
   expect(names).toContain('New Item');
 
-  // Check if the DOM updates correctly
   const pText = document.getElementById('pText');
   expect(pText.innerHTML).toContain('New Item');
 });
 
 test('No Duplications added', () => {
-  storeName('Item 1');  
-  storeName('Item 1'); 
+  const input = document.getElementById("name");
+  input.value = 'Item 1';
+  // Add item 1 twice:
+  storeName();  
+  storeName(); 
 
   expect(names).toEqual(['Item 1']);
+
+  const pText = document.getElementById('pText');
+  expect(pText.innerHTML).toContain('Item 1');
 });
 
-test('Select Random item and remove it from the list', () => {
-  storeName('Item A');
-  storeName('Item B');
 
+test('Select Random item and remove it from the list', () => {
+  const input = document.getElementById("name");
+  input.value = 'Item A';
+  storeName();
+  const input2 = document.getElementById("name");
+  input2.value = 'Item B';
+  storeName();
   const random = selectRandom();  
 
   // The item should not be in the list anymore
@@ -40,13 +52,16 @@ test('Select Random item and remove it from the list', () => {
 });
 
 test('New Match is found', () => {
-  storeName('Item 4');
-  storeName('Item 5');
-
-  newMatch();  
+  const input = document.getElementById("name");
+  input.value = 'Item A';
+  storeName();
+  const input2 = document.getElementById("name");
+  input2.value = 'Item B';
+  storeName();
+  newMatch();
 
   const element = document.getElementById("matchDisplay").innerHTML;
-
-  expect(element).toContain('Item 4');
-  expect(element).toContain('Item 5');
+  expect(element).toContain('Item B');
+  expect(element).toContain('Item A');
 });
+
