@@ -8,48 +8,21 @@
   <body>
     <div id="box">
       <h1>chitchat-matcher</h1>
-
       <h3>Who's in today?</h3>
       <div class="center">
         <input type="text" id="name" name="name" />
-
-        <button class="save" onclick="storeName()">Save</button>
+        <button class="save" id="saveButton">Save</button>
       </div>
       <p id="matchDisplay"></p>
+      <p id="matchError" class="error"></p>
       <div class="center">
-        <button class="find" onclick="newMatch()">Find Match</button> 
-      </br>
-        <button class="delete" onclick="window.location.reload();">
-         DELETE
-        </button>
+        <button class="find" onclick="newMatch()">Find Match</button>
+        <button class="delete" onclick="window.location.reload();">DELETE</button>
         <p><u>Members List</u></p>
         <p id="pText"></p>
       </div>
 
-      <script type="module" src="js/index.js"></script>
-      <script>
-        // Run on page load
-        window.onload = function() {
-    
-            // If sessionStorage is storing default values (ex. name), exit the function and do not restore data
-            if (localStorage.getItem('name') == "name") {
-                return;
-            }
-    
-            // If values are not blank, restore them to the fields
-            var name = localStorage.getItem('name');
-            if (name !== null) $('#name').val(name);
-    
-
-        }
-    
-        // Before refreshing the page, save the form data to sessionStorage
-        window.onbeforeunload = function() {
-          localStorage.setItem("name", $('#name').val());
-     
-        }
-
-    </script>
+      <script type="module" src="js/index.mjs"></script>
     </div>
   </body>
 </html>
