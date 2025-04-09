@@ -22,10 +22,26 @@ export function storeName() {
     document.getElementById("pText").innerHTML = names.join("<br/>");
     input.value = '';
   } else {
-    alert("Name is already on the list or empty!");
+
+    document.getElementById("matchError").innerHTML = "Name is already on the list or empty!";
   }
 }
 
+// Event listener für den "Save"-Button
+document.getElementById("saveButton").addEventListener("click", storeName);
+
+window.onload = function() {
+  // Wenn der Name aus dem localStorage geladen wird
+  const name = localStorage.getItem('name');
+  if (name !== null) {
+    document.getElementById('name').value = name;
+  }
+}
+
+window.onbeforeunload = function() {
+  // Vor dem Verlassen der Seite speichern wir den Namen im localStorage
+  localStorage.setItem("name", document.getElementById('name').value);
+}
 
 
 export function selectRandom() {
@@ -39,7 +55,7 @@ export function selectRandom() {
 export function newMatch() {
   console.log()
   if (names.length < 2) {
-    document.getElementById("matchDisplay").innerHTML = "Not enough names to match";
+    document.getElementById("matchError").innerHTML = "Not enough names to match";
     return;
   }
 
