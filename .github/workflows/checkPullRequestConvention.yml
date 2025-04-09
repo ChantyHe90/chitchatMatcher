@@ -1,4 +1,8 @@
 name: PR Conventional Commit Validation
+# Documentation
+# Kommt von https://www.conventionalcommits.org/en/v1.0.0/
+# und https://github.com/marketplace/actions/conventional-commit-in-pull-requests
+# ❌ Commit message does not follow the conventional commit format!
 
 on:
   pull_request:
