@@ -10,7 +10,6 @@
 // # unterschied mjs?
 // # .mjs → ESM, braucht import/export
 // # .cjs oder .js mit "type": "commonjs" → require/module.exports
-
 export const names = [];
 
 export function storeName() {
@@ -22,13 +21,17 @@ export function storeName() {
     document.getElementById("pText").innerHTML = names.join("<br/>");
     input.value = '';
   } else {
-
     document.getElementById("matchError").innerHTML = "Name is already on the list or empty!";
   }
 }
 
-// Event listener für den "Save"-Button
-document.getElementById("saveButton").addEventListener("click", storeName);
+// Add event listener for the "Save" button after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const saveButton = document.getElementById("saveButton");
+  if (saveButton) {
+    saveButton.addEventListener("click", storeName);
+  }
+});
 
 window.onload = function() {
   // Wenn der Name aus dem localStorage geladen wird
@@ -42,7 +45,6 @@ window.onbeforeunload = function() {
   // Vor dem Verlassen der Seite speichern wir den Namen im localStorage
   localStorage.setItem("name", document.getElementById('name').value);
 }
-
 
 export function selectRandom() {
   if (names.length === 0) return null;
@@ -62,7 +64,7 @@ export function newMatch() {
   let arr1 = selectRandom();
   let arr2 = selectRandom();
   document.getElementById("matchDisplay").innerHTML = `${arr1} - ${arr2}`;
-  }
+}
 
-  window.storeName = storeName;
-  window.newMatch = newMatch;
+window.storeName = storeName;
+window.newMatch = newMatch;
