@@ -1,4 +1,4 @@
-import { storeName, names, selectRandom, newMatch } from './index.js';
+import { storeName, names, selectRandom, newMatch } from './index.mjs';
 
 beforeEach(() => {
   // Reset DOM before each test
@@ -36,7 +36,7 @@ test('No Duplications added', () => {
   const pText = document.getElementById('pText');
   expect(pText.innerHTML).toContain('Item 1');
 });
-
+// run jest --watch würde immer im hintergrund laufen => package.json
 
 test('Select Random item and remove it from the list', () => {
   const input = document.getElementById("name");

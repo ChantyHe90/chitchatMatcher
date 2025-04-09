@@ -1,6 +1,15 @@
 // validty / pull-request.yml
 // conventional commits commit lint und husky
 // semantic versioning 
+// # A) nur deployen wenn tests erfolgreich ist => ich füge ein needs: test hinzu
+// # B) learning: wenn es lokal funktioniert dann oft auch in der pipe :)
+// # CJS MJS => wann was? => ich muss meine test.mjs file in config jest hinzufügen
+// # packageJson nochmal anpassen
+// # woher kommt meine commit msg :) 
+// # hol die elemnte besser aus der UI 
+// # unterschied mjs?
+// # .mjs → ESM, braucht import/export
+// # .cjs oder .js mit "type": "commonjs" → require/module.exports
 
 export const names = [];
 
@@ -28,6 +37,7 @@ export function selectRandom() {
 }
 
 export function newMatch() {
+  console.log()
   if (names.length < 2) {
     document.getElementById("matchDisplay").innerHTML = "Not enough names to match";
     return;
