@@ -1,4 +1,4 @@
-import { storeName, names, selectRandom, newMatch } from './index.js';
+import { storeName, names, selectRandom, newMatch } from './index.mjs';
 
 beforeEach(() => {
   // Reset DOM before each test
@@ -6,18 +6,24 @@ beforeEach(() => {
     <div id="pText"></div>
     <p id="matchDisplay"></p>
     <input id="name" value="" />
-    <button class="delete" onclick="window.location.reload();">Delete</button>
+    <button id="saveButton" class="delete">Save</button>
+    <p id="matchError" class="error"></p>
   `;
 
   // Reset names list
   names.length = 0;
+
+  const saveButton = document.getElementById("saveButton");
+  if (saveButton) {
+    saveButton.addEventListener("click", storeName);
+  }
 });
 
 test('Add item to the list', () => {
   const input = document.getElementById("name");
-  input.value = 'New Item'; 
+  input.value = 'New Item';
+  document.getElementById("saveButton").click();
 
-  storeName();
   expect(names).toContain('New Item');
 
   const pText = document.getElementById('pText');
@@ -28,23 +34,25 @@ test('No Duplications added', () => {
   const input = document.getElementById("name");
   input.value = 'Item 1';
   // Add item 1 twice:
-  storeName();  
-  storeName(); 
+  document.getElementById("saveButton").click();  
+  document.getElementById("saveButton").click(); 
 
   expect(names).toEqual(['Item 1']);
 
   const pText = document.getElementById('pText');
   expect(pText.innerHTML).toContain('Item 1');
 });
-
+// run jest --watch würde immer im hintergrund laufen => package.json
 
 test('Select Random item and remove it from the list', () => {
   const input = document.getElementById("name");
   input.value = 'Item A';
-  storeName();
+  document.getElementById("saveButton").click();
+  
   const input2 = document.getElementById("name");
   input2.value = 'Item B';
-  storeName();
+  document.getElementById("saveButton").click();
+  
   const random = selectRandom();  
 
   // The item should not be in the list anymore
@@ -54,14 +62,16 @@ test('Select Random item and remove it from the list', () => {
 test('New Match is found', () => {
   const input = document.getElementById("name");
   input.value = 'Item A';
-  storeName();
+  document.getElementById("saveButton").click();
+  
   const input2 = document.getElementById("name");
   input2.value = 'Item B';
-  storeName();
+  document.getElementById("saveButton").click();
+
   newMatch();
 
   const element = document.getElementById("matchDisplay").innerHTML;
-  expect(element).toContain('Item B');
   expect(element).toContain('Item A');
+  expect(element).toContain('Item B');
 });
 
